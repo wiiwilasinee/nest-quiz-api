@@ -12,7 +12,7 @@ import { OptionsModule } from './options/options.module';
       port: 5432,
       username: 'postgres',
       password: 'postgres',
-      database: 'quiz-nest',
+      database: 'nest-quiz-api',
       autoLoadEntities: true,
       synchronize: true,
     }),
