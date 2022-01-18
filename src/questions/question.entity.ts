@@ -1,4 +1,3 @@
-import { Exclude } from 'class-transformer';
 import { Option } from 'src/options/option.entity';
 import { Quiz } from 'src/quizzes/quiz.entity';
 import {
@@ -20,7 +19,6 @@ export class Question {
   @Column()
   message: string;
 
-  @Exclude({ toPlainOnly: true })
   @ManyToOne(() => Quiz, (quiz) => quiz.questions, { onDelete: 'CASCADE' })
   quiz: Quiz;
 

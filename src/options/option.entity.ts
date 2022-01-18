@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Question } from 'src/questions/question.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -10,6 +11,7 @@ export class Option {
   content: string;
 
   @Column({ default: false })
+  @Exclude({ toPlainOnly: true })
   is_correct: boolean;
 
   @ManyToOne(() => Question, (question) => question.options, {

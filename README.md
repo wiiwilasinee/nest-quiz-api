@@ -61,6 +61,7 @@ Instructions on route, method and description below.
 | /questions | POST | Create a question **Required quiz_id** |
 | /questions/:id | DELETE | Delete a question and all options |
 | /options | POST | Create an option **Required question_id** |
+| /options/:id/answer-check | GET | Check answer option is correct **return TRUE or False** |
 | /options/:id | DELETE | Delete an option |
 
 

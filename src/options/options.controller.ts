@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CreateOptionDto } from './dto/create-option.dto';
 import { Option } from './option.entity';
 import { OptionsService } from './options.service';
@@ -6,6 +6,11 @@ import { OptionsService } from './options.service';
 @Controller('options')
 export class OptionsController {
   constructor(private optionsService: OptionsService) {}
+
+  @Get('/:id/answer-check')
+  checkOptionCorrect(@Param('id') id: string): Promise<boolean> {
+    return this.optionsService.checkOptionCorrect(id);
+  }
 
   @Post()
   createOption(@Body() createOptionDto: CreateOptionDto): Promise<Option> {

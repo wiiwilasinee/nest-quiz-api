@@ -21,6 +21,11 @@ export class OptionsService {
     return option;
   }
 
+  async checkOptionCorrect(id): Promise<boolean> {
+    const option = await this.getOption(id);
+    return option.is_correct;
+  }
+
   async createOption(createOptionDto: CreateOptionDto): Promise<Option> {
     const { question_id } = createOptionDto;
     const question = await this.questionsService.getQuestion(question_id);
