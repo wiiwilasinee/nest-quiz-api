@@ -47,7 +47,7 @@ your preferred browser.
 
 ## Features
 
-Instructions on route, method and description below.
+Available routes.
 
 | Route | Method | Description |
 | ------ | ------ | ------ |
@@ -58,10 +58,10 @@ Instructions on route, method and description below.
 | /quizzes/:id | PATCH | Update quiz data |
 | /quizzes/:id | DELETE | Delete a quiz, all questions and options |
 | /quizzes | GET | Get all quizzes |
-| /questions | POST | Create a question **Required quiz_id** |
+| /questions | POST | Create a question (**Required quiz_id**) |
 | /questions/:id | DELETE | Delete a question and all options |
-| /options | POST | Create an option **Required question_id** |
-| /options/:id/answer-check | GET | Check answer option is correct **return TRUE or False** |
+| /options | POST | Create an option (**Required question_id**) |
+| /options/:id/answer-check | GET | Check answer option is correct (**return TRUE or False**) |
 | /options/:id | DELETE | Delete an option |
 
 
