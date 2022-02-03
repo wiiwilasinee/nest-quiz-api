@@ -3,46 +3,12 @@ _an API written in Nest js for creating and managing quizzes._
 
 ## Installation
 
-Install the dependencies and devDependencies and start the server.
+Install the dependencies and devDependencies start to dev with docker.
+> Note: make sure you have docker in your local.
 ```sh
 cd nest-quiz-api
 
-yarn install
-yarn start:dev
-```
-
-**Database Setup**
-
-> Note: if you do have database image in your local skip this step.
-
-Create image for postgres docker in your local.
-
-```sh
-docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD={your_password} -d postgres
-```
-
-Setting databas in `src/app.module.ts`
-
-```sh
-...
-TypeOrmModule.forRoot({
-  type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'postgres',
-  password: '{Your_Password}',
-  database: '{Your_Database_name}',
-  autoLoadEntities: true,
-  synchronize: true,
-}),
-...
-```
-
-Verify the deployment by navigating to your server address in
-your preferred browser.
-
-```sh
-127.0.0.1:5000
+docker-compose up
 ```
 
 ## Features
