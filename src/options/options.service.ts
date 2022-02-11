@@ -13,17 +13,33 @@ export class OptionsService {
     private questionsService: QuestionsService,
   ) {}
 
-  async getOption(id): Promise<Option> {
-    const option = await this.optionsRepository.findOne(id);
+  async getOption(id, withQustion?: boolean): Promise<Option> {
+    let opts = {};
+    if (withQustion) {
+      opts = { relations: ['question'] };
+    }
+    const option = await this.optionsRepository.findOne(id, opts);
     if (!option) {
       throw new NotFoundException(`Option ID ${id} not found`);
     }
     return option;
   }
 
-  async checkOptionCorrect(id): Promise<boolean> {
-    const option = await this.getOption(id);
-    return option.is_correct;
+  async checkOptionCorrect(
+    id,
+  ): Promise<{ is_correct: boolean; correct: Option; answer: Option }> {
+    const option = await this.getOption(id, true);
+    let correct = option;
+    if (option.is_correct === false) {
+      correct = await this.optionsRepository.findOne({
+        where: { question: option.question, is_correct: true },
+      });
+    }
+    return {
+      answer: option,
+      correct: option.is_correct ? option : correct,
+      is_correct: option.is_correct,
+    };
   }
 
   async createOption(createOptionDto: CreateOptionDto): Promise<Option> {

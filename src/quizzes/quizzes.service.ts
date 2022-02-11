@@ -21,14 +21,23 @@ export class QuizzesService {
     return this.quizzesRepository.getQuizzes();
   }
 
-  async getQuiz(id, withQustion?: boolean): Promise<Quiz> {
-    let options = {};
-    if (withQustion) {
-      options = { relations: ['questions', 'questions.options'] };
-    }
-    const quiz = await this.quizzesRepository.findOne(id, options);
+  async getQuiz(id): Promise<Quiz> {
+    const quiz = await this.quizzesRepository.findOne(id);
     if (!quiz) {
       throw new NotFoundException(`Quiz ID ${id} not found`);
+    }
+    return quiz;
+  }
+
+  async getQuizQustions(slug): Promise<Quiz> {
+    const options = {
+      relations: ['questions', 'questions.options'],
+      where: { slug },
+    };
+
+    const quiz = await this.quizzesRepository.findOne(options);
+    if (!quiz) {
+      throw new NotFoundException(`Quiz ${slug} not found`);
     }
     return quiz;
   }

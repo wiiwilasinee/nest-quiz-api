@@ -1,11 +1,13 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
   Param,
   Patch,
   Post,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateQuizDto } from './dto/create-quiz.dto';
 import { Quiz } from './quiz.entity';
@@ -22,12 +24,13 @@ export class QuizzesController {
 
   @Get('/:id')
   getQuiz(@Param('id') id: string): Promise<Quiz> {
-    return this.quizzesService.getQuiz(id, false);
+    return this.quizzesService.getQuiz(id);
   }
 
-  @Get('/:id/questions')
-  getQuizQustions(@Param('id') id: string): Promise<Quiz> {
-    return this.quizzesService.getQuiz(id, true);
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('/:slug/questions')
+  getQuizQustions(@Param('slug') slug: string): Promise<Quiz> {
+    return this.quizzesService.getQuizQustions(slug);
   }
 
   @Post()
